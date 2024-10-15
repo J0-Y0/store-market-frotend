@@ -27,7 +27,8 @@ export default function Navbar() {
               color="inherit"
               component="div"
             >
-              e-market
+              <Button variant="text" href="/" sx={{textTransform:"none",color:"black"}}  > e-market</Button>
+             
             </Typography>
           </Box>
 
