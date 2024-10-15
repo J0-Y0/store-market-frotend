@@ -33,7 +33,7 @@ const PasswordReset = () => {
             value="Reset"
             sx={{ marginY: 2 }}
           />
-          <Button variant="outlined">Cancel</Button>
+          <Button variant="outlined" href="/login">Cancel</Button>
         </Stack>
       </form>
     </CenteredCard>

@@ -27,7 +27,7 @@ const SignIn = () => {
         required
         sx={{ mb: 2 }}
       />
-      <LoadingButton value="Sign in" type="submit" />
+      <LoadingButton  variant="outlined" value="Sign in" type="submit"  width="100%"/>
       <Box
         display="flex"
         flexDirection="column"
@@ -35,8 +35,8 @@ const SignIn = () => {
         alignItems="center"
         width="100%"
       >
-        <Button variant="text">Have an account?</Button>
-        <Button variant="text">Forgot Password?</Button>
+        <Button  variant="text" href="/signup">Create account?</Button>
+        <Button variant="text" href="/PasswordReset">Forgot Password?</Button>
       </Box>
     </CenteredCard>
   );

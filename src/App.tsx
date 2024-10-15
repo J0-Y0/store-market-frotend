@@ -4,16 +4,45 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import PasswordReset from "./pages/PasswordReset";
 import SignUpSuccess from "./pages/SignUpSuccess";
+// import * as ReactDOM from "react-dom/client";
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>Hello world!</div>,
+  },
+  {
+    path: "/login",
+    element:<SignIn />
+  },
+  {
+    path: "/signup",
+    element:<SignUp />
+  },
+  {
+    path: "/signup-success",
+    element:<SignUpSuccess />
+  }, {
+    path: '/PasswordReset',
+    element:<PasswordReset />
+  }
+
+
+]);
 function App() {
   return (
+
     <>
-      <Navbar />
-      {/* <Home /> */}
-      <SignUpSuccess />
-      <PasswordReset />
-      <SignUp />
-      <SignIn />
+        <Navbar />
+        <RouterProvider  router={router}/>,
+
+
+      
+      
     </>
   );
 }

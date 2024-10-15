@@ -3,14 +3,16 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import { Menu, LocalGroceryStore, Delete } from "@mui/icons-material";
+import { Menu, LocalGroceryStore } from "@mui/icons-material";
 import { Badge, Button, Tooltip } from "@mui/material";
+
 export default function Navbar() {
   return (
     <Box>
       <AppBar position="static" color="transparent" elevation={1}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
+            
             <IconButton
               edge="start"
               color="inherit"
@@ -19,6 +21,7 @@ export default function Navbar() {
             >
               <Menu />
             </IconButton>
+
             <Typography
               sx={{ fontWeight: "bold", alignItems: "center" }}
               color="inherit"
@@ -27,6 +30,7 @@ export default function Navbar() {
               e-market
             </Typography>
           </Box>
+
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Tooltip title="Carts" arrow>
               <IconButton
@@ -41,7 +45,14 @@ export default function Navbar() {
                 </Badge>
               </IconButton>
             </Tooltip>
-            <Button variant="outlined">sign in</Button>
+           
+              <Button variant="outlined" href="/login">
+                Sign In
+              </Button>
+  
+           
+
+   
           </Box>
         </Toolbar>
       </AppBar>

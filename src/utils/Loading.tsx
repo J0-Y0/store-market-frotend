@@ -5,28 +5,31 @@ import Button from "@mui/material/Button";
 import { green } from "@mui/material/colors";
 
 interface Props {
-  width?: number;
+  width?: String;
   value?: string;
+  variant?:'contained' | "text" | "outlined"
   type?: "button" | "submit" | "reset";
   [key: string]: any; // Allow other props
 }
 
 export function LoadingButton({
-  width = 100,
+  width  = "auto",
   value = "Send",
   type = "button",
+  variant = "contained",
+
   ...others
 }: Props) {
   const [loading, setLoading] = React.useState(false); // Example state for loading
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", width }}>
-      <Box sx={{ my: 1, position: "relative", width }}>
+    <Box sx={{ display: "flex", alignItems: "center", width:`${width}` }}>
+      <Box sx={{ my: 1, position: "relative",width:`${width}` }}>
         <Button
-          variant="contained"
           disabled={loading}
           type={type}
-          sx={{ width }}
+          sx={{ width: `${width}` }}
+          variant = {variant}
           {...others}
         >
           {value}

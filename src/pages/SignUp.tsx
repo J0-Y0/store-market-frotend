@@ -116,7 +116,7 @@ const SignUp = () => {
           alignItems="center"
         >
           <LoadingButton value="Sign up" type="submit" />
-          <Button>Have account?</Button>
+          <Button href="/login">Have account?</Button>
         </Box>
       </form>
     </CenteredCard>
