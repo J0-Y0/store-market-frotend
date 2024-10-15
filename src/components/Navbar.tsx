@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { Menu, LocalGroceryStore } from "@mui/icons-material";
 import { Badge, Button, Tooltip } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -12,7 +13,6 @@ export default function Navbar() {
       <AppBar position="static" color="transparent" elevation={1}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            
             <IconButton
               edge="start"
               color="inherit"
@@ -27,8 +27,14 @@ export default function Navbar() {
               color="inherit"
               component="div"
             >
-              <Button variant="text" href="/" sx={{textTransform:"none",color:"black"}}  > e-market</Button>
-             
+              <Button
+                variant="text"
+                href="/"
+                sx={{ textTransform: "none", color: "black" }}
+              >
+                {" "}
+                e-market
+              </Button>
             </Typography>
           </Box>
 
@@ -46,14 +52,10 @@ export default function Navbar() {
                 </Badge>
               </IconButton>
             </Tooltip>
-           
-              <Button variant="outlined" href="/login">
-                Sign In
-              </Button>
-  
-           
 
-   
+            <Button variant="outlined" href="/login">
+              Sign In
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>

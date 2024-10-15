@@ -4,6 +4,7 @@ import { LockReset, RecordVoiceOver, ResetTv } from "@mui/icons-material";
 import StyledLink from "../utils/StyledLink";
 import { LoadingButton } from "../utils/Loading";
 import CenteredCard from "../utils/CenteredCard";
+import { Link } from "react-router-dom";
 const PasswordReset = () => {
   return (
     <CenteredCard
@@ -33,7 +34,9 @@ const PasswordReset = () => {
             value="Reset"
             sx={{ marginY: 2 }}
           />
-          <Button variant="outlined" href="/login">Cancel</Button>
+          <Button component={Link} to="/login">
+            Cancel
+          </Button>
         </Stack>
       </form>
     </CenteredCard>

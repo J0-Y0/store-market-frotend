@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CenteredCard from "../utils/CenteredCard";
+import { Link } from "react-router-dom";
 
 export const UserSchema = z
   .object({
@@ -116,7 +117,11 @@ const SignUp = () => {
           alignItems="center"
         >
           <LoadingButton value="Sign up" type="submit" />
-          <Button href="/login">Have account?</Button>
+          <Button component={Link} to="/login">
+            Have account?
+          </Button>
+
+          {/* to="/login">Have account?</> */}
         </Box>
       </form>
     </CenteredCard>

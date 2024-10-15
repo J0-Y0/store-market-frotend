@@ -6,10 +6,7 @@ import PasswordReset from "./pages/PasswordReset";
 import SignUpSuccess from "./pages/SignUpSuccess";
 // import * as ReactDOM from "react-dom/client";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,32 +14,26 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element:<SignIn />
+    element: <SignIn />,
   },
   {
     path: "/signup",
-    element:<SignUp />
+    element: <SignUp />,
   },
   {
     path: "/signup-success",
-    element:<SignUpSuccess />
-  }, {
-    path: '/PasswordReset',
-    element:<PasswordReset />
-  }
-
-
+    element: <SignUpSuccess />,
+  },
+  {
+    path: "/PasswordReset",
+    element: <PasswordReset />,
+  },
 ]);
 function App() {
   return (
-
     <>
-        <Navbar />
-        <RouterProvider  router={router}/>,
-
-
-      
-      
+      <Navbar />
+      <RouterProvider router={router} />
     </>
   );
 }
