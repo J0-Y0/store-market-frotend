@@ -6,11 +6,11 @@ import React, {
   useState,
   useMemo,
 } from "react";
-import { AuthContextType, Message } from "./types";
+import { AuthContextType, Message, User } from "./types";
 import axios from "axios";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 const AuthContext = createContext<AuthContextType | null>(null);
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -22,11 +22,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<Message | null>(null);
+  const [user, setUser] = useState<User | null>(
+    token ? jwtDecode<User>(token) : null
+  );
 
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = `JWT ${token}`;
       localStorage.setItem("access", token);
+      const decode = jwtDecode<User>(token);
+
+      setUser(decode);
     } else {
       delete axios.defaults.headers.common["Authorization"];
       localStorage.removeItem("access");
@@ -42,6 +48,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setRefreshToken,
       setLoading,
       setMessage,
+      user,
+      setUser,
     }),
     [token, loading, message]
   );

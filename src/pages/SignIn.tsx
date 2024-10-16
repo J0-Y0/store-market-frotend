@@ -5,14 +5,18 @@ import { Lock } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useLogin } from "../context/auth/hooks/useLogin";
-
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useAuth } from "../context/auth/authProvider";
 interface FormData {
   email: string;
   password: string;
 }
 
 const SignIn = () => {
+  // const navigate = useNavigate();
   const login = useLogin();
+  // const { token } = useAuth;
+  // token && navigate("/");
 
   const { register, handleSubmit } = useForm<FormData>();
 

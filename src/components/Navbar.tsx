@@ -6,8 +6,10 @@ import IconButton from "@mui/material/IconButton";
 import { Menu, LocalGroceryStore } from "@mui/icons-material";
 import { Badge, Button, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "../context/auth/authProvider";
+import Profile from "./Profile";
 export default function Navbar() {
+  const { user, logout } = useAuth();
   return (
     <Box>
       <AppBar position="static" color="transparent" elevation={1}>
@@ -52,10 +54,13 @@ export default function Navbar() {
                 </Badge>
               </IconButton>
             </Tooltip>
-
-            <Button variant="outlined" href="/login">
-              Sign In
-            </Button>
+            {user ? (
+              user.email
+            ) : (
+              <Button variant="outlined" href="/login">
+                Sign In
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

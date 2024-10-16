@@ -1,10 +1,11 @@
 // auth/useLogin.ts
 import axios from "axios";
 import { useAuth } from "../authProvider";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 export const useLogin = () => {
-  const { setToken, setRefreshToken, setLoading, setMessage } = useAuth();
-
+  const {setToken, setRefreshToken, setLoading, setMessage } = useAuth();
+  const navigate  = useNavigate()
   return async (email: string, password: string) => {
     setLoading(true);
     setMessage(null); // Clear previous messages
@@ -20,11 +21,12 @@ export const useLogin = () => {
         setRefreshToken(response.data.refresh);
         localStorage.setItem("refresh", response.data.refresh);
         localStorage.setItem("access", response.data.access);
-
+           
         setMessage({
           content: "Login successful!",
           severity: "success",
         });
+         navigate("/");
       }
     } catch (error: any) {
       const status = error.response?.status;
