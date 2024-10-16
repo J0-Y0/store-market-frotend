@@ -5,11 +5,16 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { Menu, LocalGroceryStore } from "@mui/icons-material";
 import { Badge, Button, Tooltip } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth/authProvider";
 import Profile from "./Profile";
+import BasicMenu from "./menu";
+import Logout from "../pages/Logout";
+import { useLogout } from "../context/auth/hooks/useLogout";
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
+  const logout = useLogout();
+
   return (
     <Box>
       <AppBar position="static" color="transparent" elevation={1}>
@@ -55,7 +60,7 @@ export default function Navbar() {
               </IconButton>
             </Tooltip>
             {user ? (
-              user.email
+              <BasicMenu user={user} handleLogout={() => logout()} />
             ) : (
               <Button variant="outlined" href="/login">
                 Sign In

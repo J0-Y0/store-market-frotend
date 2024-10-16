@@ -9,7 +9,6 @@ import SignUpSuccess from "./pages/SignUpSuccess";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./context/auth/authProvider";
 import Notification from "./components/Notification";
-import { useLogout } from "./context/auth/hooks/useLogout";
 import Logout from "./pages/Logout";
 const router = createBrowserRouter([
   {

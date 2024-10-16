@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import { User } from "../types";
 
 export const useLogin = () => {
-  const {setUser,setToken,token, setRefreshToken, setLoading, setMessage } = useAuth();
+  const {setUser,setToken, setRefreshToken, setLoading, setMessage } = useAuth();
   const navigate  = useNavigate()
   return async (email: string, password: string) => {
     setLoading(true);
