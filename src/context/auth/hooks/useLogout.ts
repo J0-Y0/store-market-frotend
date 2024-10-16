@@ -7,7 +7,8 @@ export const useLogout = () => {
   return () => {
     setToken(null);
     setRefreshToken(null);
-    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("refresh");
+    localStorage.removeItem("access");
     setMessage({
       content: "Logged out successfully.",
       severity: "success",

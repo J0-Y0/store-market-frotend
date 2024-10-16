@@ -16,9 +16,10 @@ export const useLogin = () => {
       );
 
       if (response.status === 200) {
-        setToken(response.data.accessToken);
-        setRefreshToken(response.data.refreshToken);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
+        setToken(response.data.access);
+        setRefreshToken(response.data.refresh);
+        localStorage.setItem("refresh", response.data.refresh);
+        localStorage.setItem("access", response.data.access);
 
         setMessage({
           content: "Login successful!",

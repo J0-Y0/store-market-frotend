@@ -15,21 +15,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [token, setToken] = useState<string | null>(
-    localStorage.getItem("token")
+    localStorage.getItem("access")
   );
   const [refreshToken, setRefreshToken] = useState<string | null>(
-    localStorage.getItem("refreshToken")
+    localStorage.getItem("refresh")
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<Message | null>(null);
 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      localStorage.setItem("token", token);
+      axios.defaults.headers.common["Authorization"] = `JWT ${token}`;
+      localStorage.setItem("access", token);
     } else {
       delete axios.defaults.headers.common["Authorization"];
-      localStorage.removeItem("token");
+      localStorage.removeItem("access");
     }
   }, [token]);
 
