@@ -9,15 +9,22 @@ import SignUpSuccess from "./pages/SignUpSuccess";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./context/auth/authProvider";
 import Notification from "./components/Notification";
+import { useLogout } from "./context/auth/hooks/useLogout";
+import Logout from "./pages/Logout";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Home />,
   },
   {
     path: "/login",
     element: <SignIn />,
   },
+  {
+    path: "/logout",
+    element: <Logout />,
+  },
+
   {
     path: "/signup",
     element: <SignUp />,

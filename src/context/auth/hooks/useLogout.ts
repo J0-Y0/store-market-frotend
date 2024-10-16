@@ -2,9 +2,10 @@
 import { useAuth } from "../authProvider.tsx";
 
 export const useLogout = () => {
-  const { setToken, setRefreshToken, setMessage } = useAuth();
+  const { setUser,setToken, setRefreshToken, setMessage } = useAuth();
 
   return () => {
+    setUser(null)
     setToken(null);
     setRefreshToken(null);
     localStorage.removeItem("refresh");

@@ -1,33 +1,44 @@
 // auth/useLogin.ts
-import axios from "axios";
 import { useAuth } from "../authProvider";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import apiClient from "../../../services/api-client";
+import { jwtDecode } from "jwt-decode";
+import { User } from "../types";
 
 export const useLogin = () => {
-  const {setToken, setRefreshToken, setLoading, setMessage } = useAuth();
+  const {setUser,setToken,token, setRefreshToken, setLoading, setMessage } = useAuth();
   const navigate  = useNavigate()
   return async (email: string, password: string) => {
     setLoading(true);
     setMessage(null); // Clear previous messages
 
     try {
-      const response = await axios.post(
-        "http://172.20.18.55:8000/auth/jwt/create/",
+      const response = await apiClient.post(
+        "/auth/jwt/create/",
         { email, password }
       );
 
       if (response.status === 200) {
-        setToken(response.data.access);
-        setRefreshToken(response.data.refresh);
-        localStorage.setItem("refresh", response.data.refresh);
-        localStorage.setItem("access", response.data.access);
-           
+        const data =response.data
+        
+
+        setToken(data.access);
+        setRefreshToken(data.refresh);
+        
+        localStorage.setItem("refresh", data.refresh);
+        localStorage.setItem("access", data.access);
+          
+
+          const decode = jwtDecode<User>(data.access);
+          setUser(decode)
+          
+        }
         setMessage({
           content: "Login successful!",
           severity: "success",
         });
          navigate("/");
-      }
+      
     } catch (error: any) {
       const status = error.response?.status;
 
