@@ -7,6 +7,8 @@ import SignUpSuccess from "./pages/SignUpSuccess";
 // import * as ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthProvider from "./context/UserAuth";
+import Notification from "./components/Notification";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,10 +33,11 @@ const router = createBrowserRouter([
 ]);
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Navbar />
       <RouterProvider router={router} />
-    </>
+      <Notification />
+    </AuthProvider>
   );
 }
 

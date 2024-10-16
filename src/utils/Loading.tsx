@@ -3,33 +3,34 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { green } from "@mui/material/colors";
+import { useAuth } from "../context/UserAuth";
 
 interface Props {
   width?: String;
   value?: string;
-  variant?:'contained' | "text" | "outlined"
+  variant?: "contained" | "text" | "outlined";
   type?: "button" | "submit" | "reset";
   [key: string]: any; // Allow other props
 }
 
 export function LoadingButton({
-  width  = "auto",
+  width = "auto",
   value = "Send",
   type = "button",
   variant = "contained",
 
   ...others
 }: Props) {
-  const [loading, setLoading] = React.useState(false); // Example state for loading
+  const { loading } = useAuth();
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", width:`${width}` }}>
-      <Box sx={{ my: 1, position: "relative",width:`${width}` }}>
+    <Box sx={{ display: "flex", alignItems: "center", width: `${width}` }}>
+      <Box sx={{ my: 1, position: "relative", width: `${width}` }}>
         <Button
           disabled={loading}
           type={type}
           sx={{ width: `${width}` }}
-          variant = {variant}
+          variant={variant}
           {...others}
         >
           {value}
