@@ -1,7 +1,7 @@
 import Alert from "@mui/material/Alert";
 import React, { useEffect, useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
-import { useAuth } from "../context/UserAuth";
+import { useAuth } from "../context/auth/authProvider";
 
 export default function Notification() {
   const [open, setOpen] = useState(false);

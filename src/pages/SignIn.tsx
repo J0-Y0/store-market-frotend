@@ -1,28 +1,20 @@
 import { Box, Button, TextField } from "@mui/material";
-import React, { FormEvent } from "react";
 import CenteredCard from "../utils/CenteredCard";
 import { LoadingButton } from "../utils/Loading";
 import { Lock } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/UserAuth";
 import { useForm } from "react-hook-form";
+import { useLogin } from "../context/auth/hooks/useLogin";
+
+interface FormData {
+  email: string;
+  password: string;
+}
 
 const SignIn = () => {
-  interface FormData {
-    username: string;
-    password: string;
-  }
-  const { login } = useAuth();
+  const login = useLogin();
 
   const { register, handleSubmit } = useForm<FormData>();
-
-  const loginUser = async (event: FormEvent) => {
-    event.preventDefault();
-    console.log("dsadsa==================");
-    login("data.username", "data.password");
-    handleSubmit((data) => login(data.username, data.password));
-    console.log("========handleSubmit==========");
-  };
 
   return (
     <CenteredCard
@@ -30,24 +22,23 @@ const SignIn = () => {
       headerText="Sign In"
       headerSubText="Welcome, please sign in to continue"
     >
-      <form onSubmit={loginUser}>
+      <form onSubmit={handleSubmit((data) => login(data.email, data.password))}>
         <TextField
+          required
           label="Email"
           type="email"
-          {...register("username")}
+          {...register("email")}
           variant="standard"
           fullWidth
-          required
           sx={{ my: 2 }}
         />
         <TextField
-          label="Password"
-          value="yos@sfs.com"
-          type="password"
-          variant="standard"
-          {...register("password")}
-          fullWidth
           required
+          label="Password"
+          type="password"
+          {...register("password")}
+          variant="standard"
+          fullWidth
           sx={{ mb: 2 }}
         />
         <LoadingButton

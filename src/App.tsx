@@ -7,7 +7,7 @@ import SignUpSuccess from "./pages/SignUpSuccess";
 // import * as ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthProvider from "./context/UserAuth";
+import { AuthProvider } from "./context/auth/authProvider";
 import Notification from "./components/Notification";
 const router = createBrowserRouter([
   {

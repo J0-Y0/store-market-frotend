@@ -3,8 +3,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { green } from "@mui/material/colors";
-import { useAuth } from "../context/UserAuth";
-
+import { useAuth } from "../context/auth/authProvider";
 interface Props {
   width?: String;
   value?: string;
