@@ -5,27 +5,50 @@ import { useAuth } from "../context/auth/authProvider";
 
 export default function Notification() {
   const [open, setOpen] = useState(false);
+  const [isKeyboardActive, setIsKeyboardActive] = useState(false);
   const { message } = useAuth(); // Ensure message is an object with content and severity
 
   useEffect(() => {
-    if (message) {
-      setOpen(true); // Open Snackbar if message is present
-    }
+    if (message) setOpen(true); // Open Snackbar if message is present
   }, [message]);
+
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportHeight = window.visualViewport?.height;
+      const screenHeight = window.innerHeight;
+
+      // Detect if keyboard is active by comparing viewport and screen height
+
+      viewportHeight && setIsKeyboardActive(viewportHeight < screenHeight);
+    };
+
+    window.visualViewport?.addEventListener("resize", handleViewportChange);
+    return () =>
+      window.visualViewport?.removeEventListener(
+        "resize",
+        handleViewportChange
+      );
+  }, []);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
-      return; // Prevent closing on clickaway
-    }
+    if (reason === "clickaway") return; // Prevent closing on clickaway
     setOpen(false);
   };
 
   return (
     message?.content && (
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: isKeyboardActive ? "top" : "bottom",
+          horizontal: "center",
+        }}
+      >
         <Alert
           onClose={handleClose}
           severity={message?.severity}
