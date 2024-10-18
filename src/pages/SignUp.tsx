@@ -1,22 +1,21 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { LoadingButton } from "../utils/Loading";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CenteredCard from "../utils/CenteredCard";
 import { Link } from "react-router-dom";
-
+import { useSignUp } from "../context/auth/hooks/useSignUp";
 export const UserSchema = z
   .object({
-    fname: z
+    first_name: z
       .string()
       .min(3, { message: "First name must be at least 3 characters." })
       .max(25, { message: "First name must be 25 characters or fewer." }),
-    lname: z
+    last_name: z
       .string()
       .min(3, { message: "Last name must be at least 3 characters." })
-      .max(25, { message: "Last name must be 25 characters or fewer." })
-      .nullable(),
+      .max(25, { message: "Last name must be 25 characters or fewer." }),
     email: z.string().email({ message: "Please enter a valid email." }),
     password: z
       .string()
@@ -32,11 +31,11 @@ export const UserSchema = z
       .regex(/[@$!%*?&#]/, {
         message: "Password must contain at least one special character.",
       }),
-    confirm: z.string(),
+    re_password: z.string(),
   })
-  .refine((data) => data.password === data.confirm, {
+  .refine((data) => data.password === data.re_password, {
     message: "Passwords do not match.",
-    path: ["confirm"], // Error will be associated with the confirm field
+    path: ["re_password"], // Error will be associated with the re_password field
   });
 
 type FormData = z.infer<typeof UserSchema>;
@@ -49,30 +48,31 @@ const SignUp = () => {
   } = useForm<FormData>({
     resolver: zodResolver(UserSchema),
   });
+  const signUp = useSignUp();
   return (
     <CenteredCard
       headerText="Sign Up"
       headerSubText="Please fill all the required fields."
     >
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
+      <form onSubmit={handleSubmit((data) => signUp(data))}>
         <TextField
           required
-          {...register("fname")}
+          {...register("first_name")}
           label="First name"
           variant="standard"
           sx={{ my: 1 }}
           fullWidth
-          error={!!errors.fname} // Marks the field as errored if there's an error
-          helperText={errors.fname?.message || ""} // Shows error message if available
+          error={!!errors.first_name} // Marks the field as errored if there's an error
+          helperText={errors.first_name?.message || ""} // Shows error message if available
         />
         <TextField
-          {...register("lname")}
+          {...register("last_name")}
           label="Last Name"
           variant="standard"
           sx={{ my: 1 }}
           fullWidth
-          error={!!errors.lname} // Marks the field as errored if there's an error
-          helperText={errors.lname?.message || ""} // Shows error message if available
+          error={!!errors.last_name} // Marks the field as errored if there's an error
+          helperText={errors.last_name?.message || ""} // Shows error message if available
         />
         <TextField
           required
@@ -102,12 +102,12 @@ const SignUp = () => {
           required
           id="standard-basic"
           label="Confirm"
-          {...register("confirm")}
+          {...register("re_password")}
           type="password"
           variant="standard"
           fullWidth
-          error={!!errors.confirm} // Marks the field as errored if there's an error
-          helperText={errors.confirm?.message || ""} // Shows error message if available
+          error={!!errors.re_password} // Marks the field as errored if there's an error
+          helperText={errors.re_password?.message || ""} // Shows error message if available
           sx={{ my: 1 }}
         />
         <Box

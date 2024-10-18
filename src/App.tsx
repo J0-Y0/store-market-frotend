@@ -3,13 +3,14 @@ import Navbar from "./components/Navbar";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import PasswordReset from "./pages/PasswordReset";
-import SignUpSuccess from "./pages/SignUpSuccess";
+import SignUpActivation from "./pages/SignUpActivation";
 // import * as ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./context/auth/authProvider";
 import Notification from "./components/Notification";
 import Logout from "./pages/Logout";
+import SignUpActivationSuccess from "./pages/SignUpActivationSuccess";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,8 +30,12 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: "/signup-success",
-    element: <SignUpSuccess />,
+    path: "/signup-activation",
+    element: <SignUpActivation />,
+  },
+  {
+    path: "/account/activate/:uid/:token",
+    element: <SignUpActivationSuccess />,
   },
   {
     path: "/PasswordReset",

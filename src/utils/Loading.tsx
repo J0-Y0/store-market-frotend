@@ -4,6 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { green } from "@mui/material/colors";
 import { useAuth } from "../context/auth/authProvider";
+import { LinearProgress } from "@mui/material";
 interface Props {
   width?: String;
   value?: string;
