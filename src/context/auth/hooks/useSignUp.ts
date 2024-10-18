@@ -42,7 +42,7 @@ export const useSignUp = () => {
       let severity: "error" | "warning" = "error";
 
       if (status === 401 || status === 400) {
-        content = "Oops! Invalid Data." + error.response.data;
+        content = "Oops! Invalid Data." + JSON.stringify(error.response.data).slice(1, -1);
         severity = "warning";
       }
       if (status === 500) content = "Server error.";
