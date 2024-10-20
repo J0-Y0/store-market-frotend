@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ProductService, { Product } from "../services/product-service";
-import ProductList from "../components/ProductList";
+import ProductList from "../components/products/ProductList";
 import { useAuth } from "../context/auth/authProvider";
 import { CanceledError } from "../services/api-client";
+import ProductCard from "../components/products/PdoductCard";
 
 const Home = () => {
   const [products, setProduct] = useState<Product[]>();
@@ -28,6 +29,10 @@ const Home = () => {
     return () => cancel();
   }, []);
 
-  return <ProductList products={products} />;
+  return (
+    <>
+      <ProductList products={products} />
+    </>
+  );
 };
 export default Home;
