@@ -16,6 +16,7 @@ export interface Product{
     collection: number;
     images: ProductImage[];
 }
+
 interface FetchProductResponse{
     count:number
     next: string
@@ -28,6 +29,13 @@ interface FetchProductResponse{
         // abort controller for async request if the user leave this page 
         const controller = new AbortController()
         const request = apiClient.get<FetchProductResponse>("store/products/", {
+                 signal: controller.signal
+        })
+    return {request,cancel:()=>controller.abort()}
+     }
+       getCollections() {
+        const controller = new AbortController()
+        const request = apiClient.get<FetchProductResponse>("store/collections/", {
                  signal: controller.signal
         })
     return {request,cancel:()=>controller.abort()}

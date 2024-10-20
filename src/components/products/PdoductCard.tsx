@@ -18,7 +18,7 @@ export default function ProductCard({
 }: Props) {
   return (
     <Card
-      sx={{ bgcolor: "#ffdabc40", maxWidth: 360, borderRadius: 5, margin: 2 }}
+      sx={{ bgcolor: "#ffdabc40", maxWidth: 320, borderRadius: 5, margin: 2 }}
     >
       <CardActionArea color="red">
         <CardMedia

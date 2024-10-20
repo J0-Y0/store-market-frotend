@@ -4,35 +4,39 @@ import ProductList from "../components/products/ProductList";
 import { useAuth } from "../context/auth/authProvider";
 import { CanceledError } from "../services/api-client";
 import ProductCard from "../components/products/PdoductCard";
+import { Divider, Grid2 } from "@mui/material";
+import ProductFilter from "../components/products/ProductFilter";
+import useProduct from "../hooks/useProduct";
 
 const Home = () => {
-  const [products, setProduct] = useState<Product[]>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const { message, setMessage } = useAuth();
-  useEffect(() => {
-    setLoading(true);
-    const { request, cancel } = ProductService.getProducts();
-    request
-      .then((res) => {
-        console.log(res.data.results);
-        setProduct(res.data.results);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setMessage({
-          content: err.message,
-          severity: "error",
-        });
-        setLoading(false);
-      });
-    return () => cancel();
-  }, []);
+  const products = useProduct();
 
   return (
-    <>
-      <ProductList products={products} />
-    </>
+    <Grid2 container spacing={1}>
+      <Grid2
+        size={3}
+        sx={{
+          height: "90vh",
+          overflowY: "auto",
+          "&::-webkit-scrollbar": { display: "none" },
+        }}
+      >
+        <ProductFilter />
+      </Grid2>
+
+      <Divider orientation="vertical" flexItem />
+      <Grid2
+        size={8}
+        sx={{
+          height: "90vh",
+          overflowY: "auto",
+          "&::-webkit-scrollbar": { display: "none" },
+        }}
+      >
+        <ProductList products={products} />
+      </Grid2>
+    </Grid2>
   );
 };
+
 export default Home;
