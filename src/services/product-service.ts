@@ -9,6 +9,7 @@ interface ProductImage{
 export interface Product{
     id: number;
     title: string;
+    description: string;
     price: number;
     price_with_tax: number;
     inventory: number;
